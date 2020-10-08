@@ -1,4 +1,4 @@
-![Python application test with Github Actions](https://github.com/dibaroy24/c02-agile-development-with-azure/workflows/Python%20application%20test%20with%20Github%20Actions/badge.svg?branch=master)
+![Python application test with Github Actions](https://github.com/dibaroy24/c02-building-a-ci-cd-pipeline/workflows/Python%20application%20test%20with%20Github%20Actions/badge.svg)
 
 # Agile Development with Azure Project: Building a CI/CD Pipeline
 
