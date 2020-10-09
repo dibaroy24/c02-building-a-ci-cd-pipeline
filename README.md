@@ -7,52 +7,76 @@ For this project, you will integrate an Azure Cloud Shell environment and use it
 
 ## Overview
 
-<TODO: complete this with an overview of your project>
+In this project, you will build a Github repository from scratch and create a scaffolding that will assist you in performing both Continuous Integration and Continuous Delivery. You'll use Github Actions along with a Makefile, requirements.txt, and application code to perform an initial lint, test, and install cycle. Next, you'll integrate this project with Azure Pipelines to enable Continuous Delivery to Azure App Service.
 
 ## Project Plan
-<TODO: Project Plan
 
-* A link to a Trello board for the project
-* A link to a spreadsheet that includes the original and final project plan>
+* Trello board for the project: https://trello.com/b/pjr5W01f/c02-building-a-ci-cd-pipeline
+* Spreadsheet that includes the original and final project plan: https://docs.google.com/spreadsheets/d/1KjMFVNLuxH0cEgII7l0ND_510zGJFeAGNsnxxOAQ4tw/edit?usp=sharing
+
+## Architectural Diagram
+
+![img-1](project-screenshots/project-architecture-capture.png)
 
 ## Instructions
 
-<TODO:  
-* Architectural Diagram (Shows how key parts of the system work)>
+Please see the following instructions for running the Python project.
 
-<TODO:  Instructions for running the Python project.  How could a user with no context run this project without asking you for any help.  Include screenshots with explicit steps to create that work. Be sure to at least include the following screenshots:
+* First of all create a GitHub repository with the project artifacts and then set up SSH Keys from your Azure Cloud Shell to authenticate connection between your GitHub and Azure Cloud.
 
-* Project running on Azure App Service
+* Once done; clone the project there as shown in the screenshot mentioned below.
 
-* Project cloned into Azure Cloud Shell
+![img-2](project-screenshots/project-cloned-into-azure-cloud-shell-capture.png)
 
-* Passing tests that are displayed after running the `make all` command from the `Makefile`
+* Create a virtual environment for your application.
 
-* Output of a test run
+* Now run the `make all` command which will execute all the steps mentioned inside the `Makefile` and all the test cases will run. The screenshot below displays the passed tests after running the `make all` command.
+
+![img-3](project-screenshots/passed-make-all-command-capture.png)
+
+* Next set up Github Actions in your repo by adding the YAML file present in the .github/workflows folder. The screenshot below shows the successful build from GitHub Actions.
+
+![img-4](project-screenshots/passed-github-actions-capture.png)
+
+* Go to Azure DevOps page; create a new project, set up a new service connection via Azure Resource Manager and Pipeline, integrate your GitHub repo and configure Python to Linux Web App on Azure which will create the required `azure-pipelines.yml` file in your GitHub repo.
+
+* Once the Azure pipelines and GitHub actions are successfully configured; check that if you make any commit then the pipeline is triggered and it runs successfully.
+
+![img-5](project-screenshots/successful-build-job-with-lint-in-azure-pipelines.png)
+
+![img-6](project-screenshots/successful-deployment-job-in-azure-pipelines.png)
+
+![img-7](project-screenshots/successful-azure-pipeline.png)
+
+* Next create and deploy the flask-sklearn app to Azure App Service using the `az webapp up -n <name of webapp>` command. Once the Azure Webapp Service is up and running; you will be able to see the flask app on the browser and the output of streamed log files from deployed application as follows.
+
+![img-8](project-screenshots/flaskmlapp-in-browser-snapshot.png)
+
+![img-9](project-screenshots/app-services-log-stream-snapshot.png)
+
+* When the app is successfully deployed then update the app service endpoint in the code and then run script `./make_predict_azure_app` file to make a prediction. The screenshot below shows the successful prediction made from deployed flask app in Azure Cloud Shell.
+
+![img-10](project-screenshots/successful-make-prediction-on-webapp-capture.png)
+
+* Lastly, run the `locust` command in your project to perform a load test on the API. You can see an output like this.
+
+![img-11](project-screenshots/locust-homepage-snapshot.png)
+
+![img-12](project-screenshots/locust-test-running-snapshot.png)
+
+
+### Reference(s)
 
 * Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
 
-* Running Azure App Service from Azure Pipelines automatic deployment
-
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
-
-```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
-Port: 443
-{"prediction":[20.35373177134412]}
-```
-
-* Output of streamed log files from deployed application
-
-> 
-
 ## Enhancements
 
-<TODO: A short description of how to improve the project in the future>
+* Run the app on Kubernetes cluster
+* Use Azure Repos, Build and Release tasks in Azure DevOps to execute the CI/CD pipeline
+* Automate the CI/CD using Infrastruture as Code (IaC)
 
 ## Demo 
 
-<TODO: Add link Screencast on YouTube>
+Demo Video Link -> https://youtu.be/71IP_oNzAtQ
 
 
